@@ -139,11 +139,10 @@ $ python app.py
 $ python 1_addRichMenu.py
 ```
 正常執行的結果，會輸出:
-```
+```python
 '{"richMenuId":"RichMenu ID 的值"}'
-
-之後請將 richMenuId 的值，複製到 2_uploadRichMenuImage.py 和 3_setRichMenu.py 有關 richMenuId 變數當中
 ```
+**注意: 之後請將 richMenuId 的值，複製到 2_uploadRichMenuImage.py 和 3_setRichMenu.py 有關 richMenuId 變數當中**
 
 ## 上傳 Rich Menu 圖片
 將上傳專案資料夾當中的 richmenu.jpg，作為 Rich Menu 的背景圖片。
