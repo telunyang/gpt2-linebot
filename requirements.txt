@@ -1,0 +1,5 @@
+Flask 
+simpletransformers
+tensorboardX
+line-bot-sdk
+requests
