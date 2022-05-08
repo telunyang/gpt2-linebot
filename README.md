@@ -58,6 +58,13 @@ import torch
 print(torch.cuda.is_available())
 ```
 
+## 新增 sqlite3 資料
+用來記錄使用者每一次的發話與回覆。
+```python
+$ python makeDB.py
+```
+![](https://i.imgur.com/6Mbq0sG.png)
+
 # 設定 LINE BOT
 1. 登入 [LINE Developers](https://developers.line.biz/console/profile)。
 2. 新增 Provider。
