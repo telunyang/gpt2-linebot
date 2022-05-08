@@ -23,7 +23,7 @@ $ conda activate chatbot
 ```
 $ git clone https://github.com/telunyang/gpt2-linebot.git
 ```
-沒有 Git 執行程式，可以直接 Download Zip 後，再自行解壓縮，而後**進入專案資料夾 gpt2_linebot**
+沒有 Git 執行程式，可以直接 Download Zip，再自行解壓縮，而後**進入專案資料夾 gpt2_linebot**
 ```
 $ cd gpt2_linebot
 ```
