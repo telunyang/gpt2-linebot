@@ -17,3 +17,4 @@ CREATE TABLE messages (
 '''
 cursor.execute(sql)
 conn.commit()
+conn.close()
