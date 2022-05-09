@@ -19,7 +19,7 @@ $ conda create --name chatbot python=3.9
 $ conda activate chatbot
 ```
 
-# 下載專案
+# (Required) 下載專案
 ```
 $ git clone https://github.com/telunyang/gpt2-linebot.git
 ```
@@ -28,44 +28,45 @@ $ git clone https://github.com/telunyang/gpt2-linebot.git
 $ cd gpt2_linebot
 ```
 
-# 下載語言模型
+# (Required) 下載語言模型
 [下載連結](https://drive.google.com/file/d/1rOJhpWwYTpt-0duqHb0nDOVFg42fz0R6/view?usp=sharing)
 存放到專案資料夾當中解壓縮，會有一個獨立的 models 資料夾。
 
 ![](https://i.imgur.com/2bzNalY.png)
 
-# 套件安裝
+# (Required) 套件安裝
 [先前的 PyTorch 版本安裝頁面](https://pytorch.org/get-started/previous-versions/)
 
-## 如果擁有 GPU (以 CUDA 11.0 為例)
+## => 如果擁有 GPU (以 CUDA 11.0 為例)
 ```python
 $ pip install torch==1.7.1+cu110 torchvision==0.8.2+cu110 torchaudio==0.7.2 -f https://download.pytorch.org/whl/torch_stable.html
 ```
 
-## 如果沒有 GPU (CPU only)
+## => 如果沒有 GPU (CPU only)
 ```python
 $ pip install torch==1.7.1+cpu torchvision==0.8.2+cpu torchaudio==0.7.2 -f https://download.pytorch.org/whl/torch_stable.html
 ```
 
-## 安裝 requirements.txt
+## 1. 安裝 requirements.txt
 ```python
 $ pip install -r requirements.txt
 ```
 
-## 確認是否啟用 GPU (電腦沒有 GPU 者，可以略過)
+## => 確認是否啟用 GPU (電腦沒有 GPU 者，可以略過)
 ```python
 import torch
 print(torch.cuda.is_available())
 ```
 
-## 新增 sqlite3 資料庫 (必須建立)
+## 2. 新增 sqlite3 資料庫
 用來記錄使用者每一次的發話與回覆。
 ```python
 $ python makeDB.py
 ```
+![](https://i.imgur.com/gZ8rYVD.png)
 ![](https://i.imgur.com/6Mbq0sG.png)
 
-# 設定 LINE BOT
+# (Required) 設定 LINE BOT
 1. 登入 [LINE Developers](https://developers.line.biz/console/profile)。
 2. 新增 Provider。
 3. 新增該 Provider 下的 Channel。
@@ -85,7 +86,7 @@ $ python makeDB.py
 # （Optional）模擬 SSL 環境設定: ngrok
 由於 LINE 的 webhook 需要使用 SSL 才能通過請求，若是在測試階段，本機沒有 SSL，此時我們需要一個暫時的 URI 來填入 Webhook URL。 
 
-## 登入 ngrok 儀表板
+## 1. 登入 ngrok 儀表板
 - 進入 [ngrok 首頁](https://ngrok.com/)。
 - 註冊一個帳號，或是使用 GitHub 或 Google 帳號來登入。
 - 進入儀表板頁面：
@@ -97,7 +98,7 @@ $ python makeDB.py
   - `$ ngrok config add-authtoken 24e35K*******************************************`
   - 註：若是放到專案資料夾下，指令可以改成 `$ ./ngrok confi add-authtoken ... ` 開頭。
 
-## 執行 ngrok
+## 2. 執行 ngrok
 專案使用的 port 號為 5005，可依需求調整:
 ```python
 $ ngrok http 5005
@@ -105,12 +106,12 @@ $ ngrok http 5005
 $ ./ngrok http 5005
 ```
 
-## ngrok 啟動成功的畫面
+## 3. ngrok 啟動成功的畫面
 ![](https://i.imgur.com/pczWMdG.png)
 **注意: 要複製 _Forwarding_ 那一列後面的網址，例如
 `https://xxxx-xxxx-xxxx-x-xxxx-xxxx-xxxx-xxxx-xxxx.jp.ngrok.io`，之後 Webhook 設定會用到。**
 
-## 回到 LINE Developers
+## 4. 回到 LINE Developers
 - 進入先前建立的 Channel。
 - 在 Webhook settings 下面的 Webhook URL 當中，編輯/填寫 `https://xxxx-xxxx-xxxx-x-xxxx-xxxx-xxxx-xxxx-xxxx.jp.ngrok.io/callback`，記得後面要加上 /**callback**，這邊會跟主程式相呼應。
 - 按下 Update 來儲存設定。
@@ -120,7 +121,7 @@ $ ./ngrok http 5005
 
 # 啟動服務
 
-## 執行主程式
+## 1. 執行主程式
 回到專案資料夾後，準備執行主程式，建立文字生成服務:
 ```python
 $ python app.py
@@ -128,7 +129,7 @@ $ python app.py
 若執行無誤，則會出現以下結果:
 ![](https://i.imgur.com/1qEgOkq.png)
 
-## 測試 Webhook
+## 2. 測試 Webhook
 回到剛才 Message API 的 Webhook 設定，按下 Verify，如果沒有錯誤，則會出現以下結果:
 ![](https://i.imgur.com/H33XwAL.png)
 
@@ -136,12 +137,12 @@ $ python app.py
 
 ---
 
-# Rich Menu
+# (Required) Rich Menu
 為了在 LINE BOT 當中可以使用指定回話情緒的選單，需要加入 RichMenu、上傳 RichMenu 圖片，並指定預設的 RichMenu。以下會提供幾個程式，可依需求自行修改內容。
 
 **註: 記得先將 config.py 的內容設定好。** 
 
-## 加入 Rich Menu
+## 1. 加入 Rich Menu
 ```python
 $ python 1_addRichMenu.py
 ```
@@ -151,7 +152,7 @@ $ python 1_addRichMenu.py
 ```
 **注意: 之後請將 richMenuId 的值，複製到 2_uploadRichMenuImage.py 和 3_setRichMenu.py 有關 richMenuId 變數當中**
 
-## 上傳 Rich Menu 圖片
+## 2. 上傳 Rich Menu 圖片
 將上傳專案資料夾當中的 richmenu.jpg，作為 Rich Menu 的背景圖片。
 ```python
 $ python 2_uploadRichMenuImage.py
@@ -161,7 +162,7 @@ $ python 2_uploadRichMenuImage.py
 '{}'
 ```
 
-## 指定預設 Rich Menu
+## 3. 指定預設 Rich Menu
 ```python
 $ python 3_setRichMenu.py
 ```
@@ -209,4 +210,4 @@ if __name__ == "__main__":
 - makeDB.py
   - 建立 sqlite3 資料庫，記錄每一個使用者的發話與回覆。
 - testBert.py
-  - 測試 coherence 分數是否能夠執行。
+  - 測試 coherence 分數預測的模型是否能夠執行。
