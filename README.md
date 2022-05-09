@@ -58,7 +58,7 @@ import torch
 print(torch.cuda.is_available())
 ```
 
-## 新增 sqlite3 資料
+## 新增 sqlite3 資料庫 (必須建立)
 用來記錄使用者每一次的發話與回覆。
 ```python
 $ python makeDB.py
