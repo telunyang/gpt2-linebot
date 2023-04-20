@@ -1,13 +1,9 @@
 # 生成式聊天對話機器人
 以 [NTCIR-14 Short Text Conversation Task (STC-3)](http://sakailab.com/ntcir14stc3/) 之語料為基礎，整合 [GPT2-Chinese](https://github.com/Morizeyao/GPT2-Chinese) 語言模型訓練工具，同時串接 [LINE Developer](https://developers.line.biz/console/profile) 的 Message API 服務，建立情感對話系統。
 
-# 參考論文
-1. [楊德倫、曾元顯 （2020）。建置與評估文字自動生成的情感對話系統。教育資料與圖書館學，57(3)，355-378。 https://doi.org/10.6120/JoEMLS.202011_57(3).0048.RS.CM](https://doi.org/10.6120/JoEMLS.202011_57(3).0048.RS.CM)
-2. [楊德倫（2021）。建立和應用具有幽默風格的生成對話系統。國立臺灣師範大學圖書資訊學研究所圖書資訊學數位學習碩士在職專班碩士論文，台北市。 取自https://hdl.handle.net/11296/467aa9](https://hdl.handle.net/11296/467aa9)
-
 # 執行環境
 - Ubuntu Server 20.04 LTS
-- Python 3.9
+- Python 3.10
 - CUDA Version: 11.0
 - NVIDIA-SMI 450.51.06
 - Driver Version: 450.51.06
@@ -15,7 +11,7 @@
 有使用 Conda 的話，可以透過指令來安裝環境:
 ```python
 # 安裝 conda 環境
-$ conda create --name chatbot python=3.9
+$ conda create --name chatbot python=3.10
 ...
 (依安裝提示訊息完成套件安裝流程)
 ...
